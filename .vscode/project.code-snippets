@@ -110,7 +110,7 @@
 		"description": "AssertThatEquals"
 	},
 	"Java File Header": {
-		"prefix": "fileheader",
+		"prefix": "project_fileheader",
 		"body": [
 			"/**",
 			" * ------------------------------------------------------------",
