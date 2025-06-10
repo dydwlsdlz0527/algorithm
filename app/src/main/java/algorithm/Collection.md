@@ -11,13 +11,15 @@
       - Stack (Vector를 상속받아서 만들어진 것)
     - _Set_
       - HashSet
-      - TreeSet
+      - _SortedSet_
+        - TreeSet
     - Queue
   
 - _Map_
   - HashMap
   - HashTable
-  - TreeMap
+  - _SortedMap_
+    - TreeMap
 
 Map 계열의 컬렉션들은 Collection 인터페이스를 상속하지 않고, 별도의 계층 구조를 가지고 있다.
 
@@ -117,6 +119,43 @@ Map 계열의 컬렉션들은 Collection 인터페이스를 상속하지 않고,
 >   - clear() : 전체 요소 제거
 >   - iterator() : 반복자 반환
 
+<hr/>
+
+> TreeSet
+> |특징|설명|
+> |:---|:---|
+> |정렬된 순서 유지|요소들이 자동으로 정렬됨(기본 정렬 또는 Comparator 기준)
+> |중복 허용 안 함|Set이므로 중복된 값은 저장되지 않음
+> |탐색/삽입/삭제 O(log n)|내부적으로 Red-Black Tree를 사용하여 효율적 수행
+> |null 허용 안 함|null 요소는 저장할 수 없음(정렬 불가)
+> |
+> 
+> - 정렬된 집합(Set) 자료구조로, 내부적으로 **Red-Black Tree**라는 자기 균형 이진 탐색 트리를 기반으로 동작한다.
+> - Tree로 시작하는 자료구조 클래스는 데이터 저장 시 **자동으로 정렬**이 되어진다.
+> - 어떤 객체를 Tree형 자료구조에 저장할 때는 반드시 **우선순위**를 결정할 수 있어야 한다.
+> - 우선 순위를 결정하기 위해서는 **Comparator 인터페이스**를 구현해 놓아야만 한다.
+> - 내부구조
+>   - Red-Black Tree는 이진 탐색 트리의 일종으로, 삽입/삭제 시에도 트리의 균형을 유지한다.
+>   - 이 덕분에 TreeSet은 항상 정렬된 상태를 유지하면서도 탐색, 삽입, 삭제가 O(log n)시간에 가능하다.
+>   - 부모보다 값이 작으면 왼쪽, 값이 크면 오른쪽에 위치한다.
+>
+> - 주요 메서드
+>   - add(E e) : 요소 추가
+>   - remove(E e) : 요소 제거
+>   - clear() : 비우기
+>   - size() : 요소 개수 반환
+>   - isEmpty() : TreeSet이 비어 있는지 확인
+>   - contains(E e) : 포함 여부 확인
+>   - first() / last() : 최소/최대 값 반환
+>   - lower(E e) / higher(E e) : 지정된 요소보다 작은/큰 값 중 가장 가까운 값
+>   - floor(E e) / ceiling(E e) : 지정된 요소 이하/이상 중 가장 가까운 값(자신이 포함되어 있으면 자기 자신 반환)
+>   - subSet(from, to) : 범위 검색 (from 이상 to 미만)
+>   - headSet(to) : 지정 값보다 작은 값들 (inclusive를 두번째 요소에 넣어서 옵션 변경)
+>   - tailSet(from) : 지정 값 이상인 값들 (inclusive를 두번째 요소에 넣어서 옵션 변경)
+>   - pollFirst() : 가장 작은 값(첫 번째 요소)을 반환하고, 집합에서 제거 (집합이 비어 있으면 null 반환)
+>   - pollLast() : 가장 큰 값(마지막 요소)을 반환하고, 집합에서 제거 (집합이 비어 있으면 null 반환)
+
+
 ### Map
 <key, value> 쌍으로 이루어진 데이터 집합, 순서는 없고 키는 중복이 안되나 값은 중복이 가능
 구현 클래스 : HashMap, HashTable, TreeMap
@@ -142,3 +181,27 @@ Map 계열의 컬렉션들은 Collection 인터페이스를 상속하지 않고,
 >   - keySet() : 모든 키를 Set으로 반환
 >   - values() : 모든 값을 Collection으로 반환
 >   - entrySet() : 모든 키-값을 쌍 Set<Map.Entry<K,V>>로 반환
+
+<hr/>
+
+> TreeMap
+> |특징|설명|
+> |:---|:---|
+> |정렬된 키 순서 유지|키는 항상 오름차순(또는 Comparator 기준)으로 정렬됨
+> |중복 키 불가|Map이므로 키는 유일해야 함
+> |null 키 허용 안 됨|TreeMap은 null 키를 허용하지 않음
+> |범위 검색 가능|subMap(),headMap(),tailMap() 등 제공
+> |최소/최대 키 접근 가능|firstKey(), lastKey() 메서드 제공
+> |
+> - TreeMap<K, V>는 Map 인터페이스를 구현한 클래스 중 하나로, **Key**를 기준으로 **자동 정렬**되는 Map이다.
+> - 내부적으로 Red-Black Tree를 사용하여 탐색, 삽입, 삭제가 O(log n)시간에 수행된다.
+> 
+> - 주요 메서드
+>   - put(K, V) : 키-값 쌍 추가
+>   - get(K) : 키에 해당하는 값 반환
+>   - remove(K) : 키-값 쌍 제거
+>   - firstKey() / lastKey() : 가장 작은/큰 키 반환
+>   - higherKey(K) / lowerKey(K) : 특정 키보다 큰/작은 키 반환
+>   - ceilingKey(K) / floorKey(K) : 이상/이하인 가장 가까운 키
+>   - subMap(fromKey, toKey) : 범위 내 키-값 쌍 반환
+>   - pollFirstEntry() / pollLastEntry() : 가장 작은/큰 항목 반환 후 제거

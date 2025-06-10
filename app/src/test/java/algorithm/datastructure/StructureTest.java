@@ -22,4 +22,19 @@ public class StructureTest {
     void testHashSet(){
         Structure.testHashSet();
     }
+
+    @Test
+    void testTreeSet(){
+        Structure.testTreeSet();
+    }
+
+    @Test
+    void testTestTreeSet2() {
+        Structure.testTreeSet2();
+    }
+
+    @Test
+    void testTestTreeMap() {
+        Structure.testTreeMap();   
+    }
 }
