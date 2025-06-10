@@ -3,12 +3,23 @@ package algorithm.search;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import algorithm.twopointer.leetcode.TwoSum;
+
 public class TwoSumTest {
     @Test
     void testTwoSum() {
         TwoSum ts = new TwoSum();
-        int[] nums = {2,7,11,15};
-        int target = 9;
-        Assertions.assertEquals(new int[]{0,1},ts.twoSum(nums, target));
+        int[] nums = { 4, 1, 9, 7, 5, 3, 16 };
+        int target = 14;
+        Assertions.assertTrue(ts.twoSum(nums, target));
     }
+
+    @Test
+    void testTwoSum2() {
+        TwoSum ts = new TwoSum();
+        int[] nums = { 4, 1, 9, 7, 5, 3, 16 };
+        int target = 14;
+        Assertions.assertTrue(ts.twoSum2(nums, target));
+    }
+
 }

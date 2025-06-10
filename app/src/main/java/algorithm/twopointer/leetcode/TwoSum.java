@@ -1,4 +1,7 @@
-package algorithm.search;
+package algorithm.twopointer.leetcode;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * ------------------------------------------------------------
@@ -14,19 +17,39 @@ package algorithm.search;
  */
 public class TwoSum {
     
-    public int[] twoSum(int[] nums, int target){
+    public boolean twoSum(int[] nums, int target){
         // 2개 수의 인덱스를 담을 배열 선언.
-        int[] result = new int[2];
+        // int[] result = new int[2];
 
-        // 완전 탐색
+        // 1. 완전 탐색 O(n^2)
         for(int i=0;i<nums.length;i++){
             for(int j=i;j<nums.length;j++){
                 if(target == nums[i]+nums[j]){
-                    result[0] = i;
-                    result[1] = j;
+                    return true;
                 }
             }
         }
-        return result;
+        return false;
+    }
+
+    public boolean twoSum2(int[] nums, int target){
+
+        Set<Integer> set = new HashSet<>();
+        // O(n)
+        for(int i : nums){
+            set.add(i);
+        }
+        // O(n)
+        for(int j=0;j<nums.length;j++){
+            if(set.contains(target-nums[j])){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean twoSum3(int[] nums, int target){
+
+        return false;
     }
 }
