@@ -73,7 +73,7 @@ Map 계열의 컬렉션들은 Collection 인터페이스를 상속하지 않고,
 |클래스   |특징   |
 |:---|:---|
 |LinkedList   |큐와 덱(Deque) 모두 지원   |
-|ArrayDeque|배열 기반, 빠르고 효율적|
+|**ArrayDeque**|배열 기반, 빠르고 효율적|
 |PriorityQueue|우선순위 큐, 요소의 우선순위에 따라 정렬됨|
 |ConcurrentLinkedQueue|멀티스레드 환경에서 안전한 비동기 큐|
 
