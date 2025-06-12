@@ -23,52 +23,66 @@ import java.io.OutputStreamWriter;
  */
 public class Main6137 {
 
-    public static void twoPointer() {
-        StringBuilder T = new StringBuilder();
+    public static void main() {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));) {
+            // 문자열 S의 길이 N
             int N = Integer.parseInt(br.readLine());
-            char[] arr = new char[N];
+            StringBuilder sb = new StringBuilder();
+            char[] array = new char[N];
+            // char 배열에 입력받은 값을 문자열로 만든다.
             for (int i = 0; i < N; i++) {
-                arr[i] = br.readLine().charAt(0);
+                array[i] = br.readLine().charAt(0);
             }
+            // array의 양 끝 초기값 설정
             int left = 0;
-            int right = (N - 1) - left;
-            // 사전순으로 가장 빠른 문자열을 출력한다.
-            while (right > left) {
-                // 왼쪽이 사전순으로 더 빠름.
-                if (arr[right] - arr[left] > 0) {
-                    T.append(arr[left]);
-                    left += 1;
-                    // 오른쪽이 사전순으로 더 빠름.
-                } else if (arr[right] - arr[left] < 0) {
-                    T.append(arr[right]);
-                    right -= 1;
-                    // 양쪽이 같은 문자라면 다음 양쪽 문자를 비교해야한다.
-                    // 다음 양쪽 문자도 같으면 또 다음 문자를 비교해야한다.
-                } else if (arr[right] - arr[left] == 0) {
-                    int temp = 1;
-                    // ABCEDCBA
-                    while (arr[right - temp] == arr[left + temp]) {
-                        if (arr[right - temp] - arr[left + temp] > 0) {
-                            T.append(arr[left]);
-                            left += 1;
+            int right = N - 1;
+            int count = 0;
+            while (left <= right) {
+                // 양 끝의 문자열을 비교해 사전순 가장 빠른 문자열을 T에 추가
+                if (array[left] - array[right] < 0) {
+                    sb.append(array[left]);
+                    left++;
+                    count++;
+                } else if (array[left] - array[right] > 0) {
+                    sb.append(array[right]);
+                    right--;
+                    count++;
+                } else {
+                    // 만약 양 끝 문자열이 같다면 양 끝의 다음 문자열을 비교해서 빠른 쪽의 문자열을 추가
+                    int left2 = left + 1;
+                    int right2 = right - 1;
+                    boolean diffCheck = false;
+                    while (left2 <= right2) {
+                        if (array[left2] - array[right2] < 0) {
+                            sb.append(array[left]);
+                            left++;
+                            diffCheck = true;
+                            count++;
+                            break;
+                        } else if (array[left2] - array[right2] > 0) {
+                            sb.append(array[right]);
+                            right--;
+                            diffCheck = true;
+                            count++;
+                            break;
                         } else {
-                            T.append(arr[right]);
-                            right -= 1;
+                            left2++;
+                            right2--;
                         }
-                        ++temp;
+                    }
+                    // 끝까지 갔는데 양쪽이 모두 동일 (왼쪽 오른쪽 중 하나 선택)
+                    if (!diffCheck) {
+                        sb.append(array[left]);
+                        left++;
+                        count++;
                     }
                 }
-                if (T.length() == 80) {
-                    T.append(arr[right]);
-                    bw.write(T.toString());
-                    bw.newLine();
-                    T = new StringBuilder();
+                if (count % 80 == 0) {
+                    sb.append("\n");
                 }
             }
-            T.append(arr[right]);
-            bw.write(T.toString());
+            bw.write(sb.toString());
             bw.flush();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,4 +1,4 @@
-package algorithm.twopointer.baekjoon;
+package algorithm.stack.backjoon;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class Main6137Test {
+public class Main10773Test {
 
     private final InputStream originalSystemIn = System.in; // 원래 System.in 저장
     private final PrintStream originalSystemOut = System.out; // 원래 System.out 저장 (출력 테스트 시 필요)
@@ -32,10 +32,16 @@ public class Main6137Test {
 
     @Test
     void testMain() {
-        String input = "6\nA\nC\nD\nB\nC\nB";
+        String input = """
+                4
+                3
+                0
+                4
+                0
+                """;
         System.setIn(new ByteArrayInputStream(input.getBytes()));
-        Main6137.main();
+        Main10773.main(new String[] {});
         String actualOutput = outputStreamCaptor.toString();
-        Assertions.assertEquals("ABCBCD", actualOutput);
+        Assertions.assertEquals("0",actualOutput);
     }
 }
