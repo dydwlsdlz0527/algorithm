@@ -14,7 +14,7 @@ import java.util.Stack;
  */
 public class DailyTemperature {
 
-    public int[] solution(int[] temperatures) {
+    public static int[] solution(int[] temperatures) {
         int[] result = new int[temperatures.length];
         Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < temperatures.length; i++) {
